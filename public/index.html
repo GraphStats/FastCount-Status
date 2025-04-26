@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service Status Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at center, #000428, #004e92);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      animation: fadeIn 1s ease-in-out;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(90deg, #00ffe7, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    ul {
+      list-style: none;
+      width: 100%;
+      max-width: 600px;
+      padding: 1rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+    }
+
+    li {
+      font-size: 1.1rem;
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    li:hover {
+      transform: scale(1.015);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .status-label {
+      font-weight: bold;
+      padding: 0.3rem 0.7rem;
+      border-radius: 10px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      transition: all 0.5s ease;
+      display: inline-block; /* This makes sure the width is based on the content */
+    }
+
+    .up {
+      background-color: rgba(0, 255, 183, 0.2);
+      color: #00ffb3;
+      border: 1px solid #00ffb3;
+    }
+
+    .down {
+      background-color: rgba(255, 77, 77, 0.2);
+      color: #ff4d4d;
+      border: 1px solid #ff4d4d;
+    }
+
+    .percentage {
+      font-size: 0.85rem;
+      color: #ccc;
+      margin-top: 0.2rem;
+      text-align: right;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffe7;
+      }
+      to {
+        text-shadow: 0 0 20px #00c6ff, 0 0 40px #0072ff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Service Status</h1>
+  <ul id="status-list">
+    <li>Loading services...</li>
+  </ul>
+
+  <script>
+    let previousStatus = {};
+
+    async function fetchStatus() {
+      try {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+        const list = document.getElementById('status-list');
+        list.innerHTML = '';
+
+        data.forEach(service => {
+          const li = document.createElement('li');
+
+          // Fake uptime percentage for now
+          const uptime = Math.floor(Math.random() * 0.2 + 98); // 90% - 99%
+
+          const statusClass = service.status.toLowerCase();
+          const hasStatusChanged = previousStatus[service.name] !== statusClass;
+
+          // Create the status label
+          const statusLabel = document.createElement('div');
+          statusLabel.classList.add('status-label', statusClass);
+          statusLabel.textContent = service.status;
+
+          // Apply animation when status changes
+          if (hasStatusChanged) {
+            statusLabel.classList.add('status-change');
+          }
+
+          li.innerHTML = `
+            <div>
+              <div><strong>${service.name}</strong></div>
+            </div>
+          `;
+          li.appendChild(statusLabel);
+          list.appendChild(li);
+
+          previousStatus[service.name] = statusClass;
+        });
+      } catch (err) {
+        const list = document.getElementById('status-list');
+        list.innerHTML = '<li class="down">Connection error. Unable to fetch service status.</li>';
+      }
+    }
+
+    fetchStatus();
+    setInterval(fetchStatus, 3000);
+  </script>
+</body>
+</html>

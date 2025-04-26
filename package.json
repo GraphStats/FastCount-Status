@@ -1,0 +1,14 @@
+{
+    "name": "page-statuts",
+    "version": "1.0.0",
+    "description": "Vérifie l'état de plusieurs services (UP/DOWN)",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "node-fetch": "^2.6.9"
+    }
+  }
+  
