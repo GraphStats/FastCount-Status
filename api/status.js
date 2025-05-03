@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 const services = [
-  { name: 'FastCount', url: 'http://fast-count.vercel.app/qdfshjpkjj' },
+  { name: 'FastCount', url: 'http://fast-count.vercel.app/' },
   { name: 'API Count', url: 'https://ests.sctools.org/api/get/UCX6OQ3DkcsbYNE6H8uQQuVA' },
   { name: 'API Search', url: 'https://mixerno.space/api/youtube-channel-counter/search/mrbeast' }
 ];
