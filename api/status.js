@@ -23,7 +23,7 @@ async function checkServices() {
   // Création d'un tableau pour stocker toutes les promesses de fetch
   const serviceChecks = services.map(async (service) => {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 7000); // 3000 ms timeout
+    const timeout = setTimeout(() => controller.abort(), 12000); // 3000 ms timeout
 
     try {
       const response = await fetch(service.url, { signal: controller.signal });
