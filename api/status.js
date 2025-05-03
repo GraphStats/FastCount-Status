@@ -22,7 +22,7 @@ async function checkServices() {
   // Création d'un tableau pour stocker toutes les promesses de fetch
   const serviceChecks = services.map(async (service) => {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 300); // 3000 ms timeout
+    const timeout = setTimeout(() => controller.abort(), 2000); // 3000 ms timeout
 
     try {
       const response = await fetch(service.url, { signal: controller.signal });
@@ -50,7 +50,7 @@ async function checkServices() {
 }
 
 // Lancer la vérification toutes les 10 secondes
-setInterval(checkServices, 1000);
+setInterval(checkServices, 20000);
 checkServices(); // première vérification immédiate
 
 app.use(express.static('public'));
