@@ -6,7 +6,7 @@ const PORT = 3000;
 const services = [
   { name: 'FastCount', url: 'http://fast-count.vercel.app/gfbf' },
   { name: 'API Count', url: 'https://backend.mixerno.space/api/yube/estv3/UCX6OQ3Dk' },
-  { name: 'API Search', url: 'https://mixerno.space/api/youtube-cha/mrbeast' },
+  { name: 'API Search', url: 'https://mixerno.space/api/youtube-channel-counter/search/mrbeast' },
   { name: 'FastCount Status', url: 'https://fast-count-status.vercel.app/dfh' }
 ];
 
