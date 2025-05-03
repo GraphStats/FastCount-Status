@@ -50,7 +50,7 @@ async function checkServices() {
 }
 
 // Lancer la vérification toutes les 10 secondes
-setInterval(checkServices, 10000);
+setInterval(checkServices, 1000);
 checkServices(); // première vérification immédiate
 
 app.use(express.static('public'));
