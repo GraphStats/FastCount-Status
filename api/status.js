@@ -4,10 +4,10 @@ const app = express();
 const PORT = 3000;
 
 const services = [
-  { name: 'FastCount', url: 'http://fast-count.vercel.app/' },
-  { name: 'API Count', url: 'https://backend.mixerno.space/api/youtube/estv3/UCX6OQ3DkcsbYNE6H8uQQuVA' },
-  { name: 'API Search', url: 'https://mixerno.space/api/youtube-channel-counter/search/mrbeast' },
-  { name: 'FastCount Status', url: 'https://fast-count-status.vercel.app/' }
+  { name: 'FastCount', url: 'http://fast-count.vercel.app/gfbf' },
+  { name: 'API Count', url: 'https://backend.mixerno.space/api/yube/estv3/UCX6OQ3Dk' },
+  { name: 'API Search', url: 'https://mixerno.space/api/youtube-cha/mrbeast' },
+  { name: 'FastCount Status', url: 'https://fast-count-status.vercel.app/dfh' }
 ];
 
 const serviceStatus = {}; // Exemple: { "FastCount": { status: "UP", uptime: 97.23 } }
